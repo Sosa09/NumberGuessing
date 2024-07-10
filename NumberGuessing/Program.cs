@@ -8,6 +8,8 @@
             //Instantiating the Random class object
             Random random = new Random();
             int TOTAL_CHANCES = 10;
+            int MAX_GUESSING_NUMBER = 100;
+            int MIN_GUESSING_NUMBER = 1;
 
             //Introduction Text
             Console.WriteLine("Hello, World!, Let's play a game.\n" +
@@ -17,7 +19,7 @@
             while(true)
             {
                 //decalre the game values
-                int randomNr = random.Next(1, 100);
+                int randomNr = random.Next(MIN_GUESSING_NUMBER, MAX_GUESSING_NUMBER);
                 int chancesLeft= TOTAL_CHANCES;
                 int OFFFIVE = 5;
                 bool nrIsGuessed = false;
@@ -31,18 +33,26 @@
                     
                     int.TryParse(Console.ReadLine(), out int userInput); //Reading user inpyt and parsing into int at the same time as well as avoiding system to crash if userinput is not nr or empty
 
-                   
+                    int difference = 0;
                     if (randomNr < userInput)
+                    {
                         Console.WriteLine("Too High try again");
-                    else if (randomNr > userInput)
+                        difference = userInput - randomNr;
+                    }                  
+                    else if (randomNr > userInput) 
+                    {
                         Console.WriteLine("Too low try again");
+                        difference = randomNr - userInput;
+
+                    }
                     else if (randomNr == userInput)
                         nrIsGuessed=true;
 
-                   
-                    //Checking if the userinput is close to the random nr
-                    if (userInput - OFFFIVE == randomNr || userInput + OFFFIVE == randomNr)
-                        Console.WriteLine("You're close!");
+                    if (difference <= OFFFIVE ) 
+                    {
+                        Console.WriteLine("You're close !");
+
+                    }
 
                     chancesLeft--; //decrement chancesLeft
 
