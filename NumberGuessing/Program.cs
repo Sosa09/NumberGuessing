@@ -10,6 +10,7 @@
             int TOTAL_CHANCES = 10;
             int MAX_GUESSING_NUMBER = 100;
             int MIN_GUESSING_NUMBER = 1;
+            bool isDifferenceFive = false;
 
             //Introduction Text
             Console.WriteLine("Hello, World!, Let's play a game.\n" +
@@ -21,7 +22,7 @@
                 //decalre the game values
                 int randomNr = random.Next(MIN_GUESSING_NUMBER, MAX_GUESSING_NUMBER);
                 int chancesLeft= TOTAL_CHANCES;
-                int OFFFIVE = 5;
+                int DIFFERENCE_VALUE = 5;
                 bool nrIsGuessed = false;
 
                 while (chancesLeft > 0 && nrIsGuessed == false) 
@@ -33,26 +34,27 @@
                     
                     int.TryParse(Console.ReadLine(), out int userInput); //Reading user inpyt and parsing into int at the same time as well as avoiding system to crash if userinput is not nr or empty
 
-                    int difference = 0;
+                    
+
+                    
                     if (randomNr < userInput)
                     {
                         Console.WriteLine("Too High try again");
-                        difference = userInput - randomNr;
+                        isDifferenceFive = userInput - randomNr <= DIFFERENCE_VALUE;
                     }                  
                     else if (randomNr > userInput) 
                     {
                         Console.WriteLine("Too low try again");
-                        difference = randomNr - userInput;
+                        isDifferenceFive = randomNr - userInput <= DIFFERENCE_VALUE;
 
                     }
                     else if (randomNr == userInput)
                         nrIsGuessed=true;
 
-                    if (difference <= OFFFIVE ) 
-                    {
+                    if (isDifferenceFive) 
                         Console.WriteLine("You're close !");
 
-                    }
+                    
 
                     chancesLeft--; //decrement chancesLeft
 
